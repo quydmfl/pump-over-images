@@ -26,6 +26,10 @@ Your skills should include:
 - AWS Services.
 - Source image get from API third-party (unknowns).
 
+## System architecture
+
+![System Architecture](assets/pump_system.png)
+
 ## How to run
 
 1. Run start docker localstack with AWS services.
