@@ -1,0 +1,28 @@
+# Build local-stack with three services. Includes: AWS s3, cloudwatch, lambda.
+services:
+  # Application code can then use
+  # http://localstack:4566 for the endpoint url
+  aws:
+    image: localstack/localstack
+    container_name: aws-locally
+    ports:
+      - "4566:4566" # LocalStack Gateway
+      - "4510-4559:4510-4559" # external services port range
+    environment:
+      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
+      - DEBUG=${DEBUG:-0}
+      - SERVICES=s3,cloudwatch,lambda
+      - GATEWAY_LISTEN=0.0.0.0:4566
+      - MAIN_DOCKER_NETWORK=aws-network
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    env_file:
+      - .env
+    networks:
+      - aws-network
+
+networks:
+  aws-network:
+    name: aws-network
+    driver: bridge
