@@ -1,0 +1,32 @@
+version: '3'
+
+tasks:
+  dev:
+    desc: "Run application for dev"
+    cmds:
+      - task :start -w --interval=500ms
+    silent: true
+
+  :start:
+    desc: "Start project"
+    cmds:
+      - task: :build
+      - "./dist/fetch"
+    sources:
+      - ./*.go
+      - ./**/*.go
+    silent: true
+
+  :build:
+    desc: "Build executed file"
+    cmds:
+      - "go build -o dist/ ./cmd/..."
+    sources:
+      - ./*.go
+      - ./**/*.go
+    silent: true
+  
+  :checksum:
+    desc: "Create new string with hash openssl"
+    cmds:
+      - "openssl rand -base64 12"

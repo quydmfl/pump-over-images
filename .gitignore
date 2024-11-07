@@ -17,3 +17,8 @@ build/
 data
 .env
 .env.prod
+
+# build
+tmp
+dist
+.task

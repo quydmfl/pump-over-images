@@ -1,0 +1,3 @@
+redis:
+  addr: localhost:5432
+  password: 9oRe+3t14XQSa5xi
